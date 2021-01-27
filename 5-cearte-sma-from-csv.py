@@ -8,9 +8,10 @@ import talib
 
 es = Elasticsearch("https://464d6c48623b49a18b4d04d8dd301996.asia-east1.gcp.elastic-cloud.com:9243", http_auth=('elastic', 'q4dT1Cht7K8aSGOIlnPMDae1'))
 
+index_ref = "price_csv"
+index_name = "price_sma"
 
-
-s = Search(using=es, index="price_csv") \
+s = Search(using=es, index=index_ref) \
     .filter("range", Date={"gte": "now-10000d/d","lt": "now/d"}) \
     .query("match", Stock_id=500) \
     .sort({"Date": {"order": "desc"}})    
@@ -78,4 +79,4 @@ for i in range(len(stock_id)):
     documents.append(action)
     documents.append(document)
 
-result = es.bulk(body=documents, index='price_sma')
+result = es.bulk(body=documents, index=index_name)

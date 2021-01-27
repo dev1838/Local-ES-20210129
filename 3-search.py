@@ -3,7 +3,7 @@ from elasticsearch_dsl import Search
 
 es = Elasticsearch("https://464d6c48623b49a18b4d04d8dd301996.asia-east1.gcp.elastic-cloud.com:9243", http_auth=('elastic', 'q4dT1Cht7K8aSGOIlnPMDae1'))
 
-this_index = 'price_csv'
+index_name = "price_csv"
 
 searchBody = {
     "sort" : [
@@ -28,13 +28,13 @@ searchBody = {
     }
 }
 
-response = es.search(index = this_index,body=searchBody)
+response = es.search(index=index_name, body=searchBody)
 
 print(response["hits"]["total"]["value"])  
 print(response["hits"]["hits"][0]["_source"]) 
 
 #Elasticsearch DSL
-s = Search(using=es, index = this_index) \
+s = Search(using=es, index=index_name) \
     .filter("range", Date={"gte": "now-10000d/d","lt": "now/d"}) \
     .query("match", Stock_id=700) \
     .sort({"Date": {"order": "desc"}})    

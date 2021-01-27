@@ -6,7 +6,7 @@ es = Elasticsearch("https://464d6c48623b49a18b4d04d8dd301996.asia-east1.gcp.elas
 
 stock_list = [500, 700]
 
-this_index = 'price_csv'
+index_name = "price_csv"
 
 for stock_id in stock_list:
     stock_id_price_path = "{0}/{1}.csv".format("/Users/terrychiu/Documents/work/electic_scearch2", stock_id)
@@ -33,7 +33,7 @@ for stock_id in stock_list:
                 documents.append(action)
                 documents.append(document)
                 
-                result = es.bulk(body=documents, index=this_index)
+                result = es.bulk(body=documents, index=index_name)
                 
     except IOError:
         print("File not accessible")

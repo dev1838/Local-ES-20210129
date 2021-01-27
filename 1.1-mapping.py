@@ -4,7 +4,7 @@ from elasticsearch_dsl import Search
 
 es = Elasticsearch("https://464d6c48623b49a18b4d04d8dd301996.asia-east1.gcp.elastic-cloud.com:9243", http_auth=('elastic', 'q4dT1Cht7K8aSGOIlnPMDae1'))
 
-this_index = 'price_sma'
+index_name = "price_sma"
 
 # mapping
 index_body = {
@@ -24,4 +24,4 @@ index_body = {
     }
 }
 
-result = es.indices.create(index='price_sma', body=index_body)
+result = es.indices.create(index=index_name, body=index_body)
